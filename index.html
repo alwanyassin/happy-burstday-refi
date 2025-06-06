@@ -1,0 +1,1578 @@
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY BURSTDAY - Refiii</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --candy-pink: #FF85A2;
+            --candy-purple: #B388EB;
+            --candy-blue: #8FB8ED;
+            --candy-yellow: #FFC85C;
+            --candy-mint: #A0E7E5;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF5F7;
+            overflow-x: hidden;
+            background-image: radial-gradient(var(--candy-pink) 1px, transparent 1px), 
+                             radial-gradient(var(--candy-blue) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            background-attachment: fixed;
+        }
+        
+        .fancy-title {
+            font-family: 'Pacifico', cursive;
+        }
+        
+        .candy {
+            transition: all 0.3s ease;
+            /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); */
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .candy:hover {
+            transform: translateY(-10px) rotate(3deg);
+            /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); */
+        }
+        
+        .modal {
+            transition: all 0.3s ease;
+        }
+        
+        .letter-content {
+            background-color: white;
+            background-image: 
+                linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+                linear-gradient(#eee .1em, transparent .1em);
+            background-size: 100% 1.2em;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .candy-wrapper {
+            position: relative;
+            perspective: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .candy-sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+            opacity: 0;
+            animation: sparkle 2s infinite;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        .sparkle1 { top: 10%; left: 20%; animation-delay: 0s; }
+        .sparkle2 { top: 30%; left: 80%; animation-delay: 0.3s; }
+        .sparkle3 { top: 70%; left: 10%; animation-delay: 0.6s; }
+        .sparkle4 { top: 50%; left: 90%; animation-delay: 0.9s; }
+        .sparkle5 { top: 90%; left: 40%; animation-delay: 1.2s; }
+        
+        .candy-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: var(--candy-pink);
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+        
+        .special-lyrics {
+            font-weight: 600;
+            color: var(--candy-purple);
+            font-size: 1.2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .special-lyrics::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--candy-pink), var(--candy-purple), var(--candy-blue));
+            border-radius: 3px;
+        }
+        
+        .candy-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .heart-beat {
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--candy-pink);
+            opacity: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .candy-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Gift Box Styles */
+        .gift-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #FFF5F7;
+            z-index: 1000;
+            transition: all 0.5s ease;
+        }
+        
+        .gift-box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .gift-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .gift-box-bottom {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--candy-pink), var(--candy-purple));
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gift-box-lid {
+            position: absolute;
+            width: 220px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--candy-purple), var(--candy-blue));
+            top: -20px;
+            left: -10px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform-origin: center bottom;
+            transition: all 0.8s ease;
+        }
+        
+        .gift-box:hover .gift-box-lid {
+            transform: rotateX(-20deg);
+        }
+        
+        .gift-ribbon-vertical {
+            position: absolute;
+            width: 30px;
+            height: 200px;
+            background-color: var(--candy-yellow);
+            left: 85px;
+            border-radius: 15px;
+        }
+        
+        .gift-ribbon-horizontal {
+            position: absolute;
+            width: 200px;
+            height: 30px;
+            background-color: var(--candy-yellow);
+            top: 85px;
+            border-radius: 15px;
+        }
+        
+        .gift-bow {
+            position: absolute;
+            top: -30px;
+            left: 70px;
+            width: 60px;
+            height: 60px;
+            z-index: 10;
+            transform-origin: center;
+            animation: bowWiggle 3s ease-in-out infinite;
+        }
+        
+        @keyframes bowWiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        .gift-bow-left, .gift-bow-right {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--candy-mint);
+            border-radius: 50% 50% 0 50%;
+        }
+        
+        .gift-bow-left {
+            transform: rotate(45deg);
+            left: 0;
+        }
+        
+        .gift-bow-right {
+            transform: rotate(135deg);
+            right: 0;
+        }
+        
+        .gift-bow-center {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--candy-mint);
+            border-radius: 50%;
+            top: 20px;
+            left: 20px;
+        }
+        
+        .gift-sparkles {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            pointer-events: none;
+        }
+        
+        .gift-sparkle {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: giftSparkle 2s linear infinite;
+        }
+        
+        @keyframes giftSparkle {
+            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+        
+        .gift-text {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--candy-purple);
+            font-size: 1.5rem;
+            font-weight: 600;
+            max-width: 80%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .gift-click-hint {
+            margin-top: 20px;
+            color: var(--candy-pink);
+            font-size: 1rem;
+            opacity: 0;
+            animation: pulse 2s infinite 1.5s;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+        
+        /* Gift Opening Animation */
+        .gift-opening {
+            pointer-events: none;
+        }
+        
+        .gift-opening .gift-box {
+            animation: giftOpen 1.5s forwards;
+        }
+        
+        .gift-opening .gift-box-lid {
+            animation: lidOpen 1s forwards;
+        }
+        
+        @keyframes giftOpen {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        @keyframes lidOpen {
+            0% { transform: rotateX(0); }
+            100% { transform: rotateX(-80deg); }
+        }
+        
+        .candy-burst {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            opacity: 0;
+        }
+        
+        @keyframes burstOut {
+            0% { 
+                transform: translate(0, 0) scale(0); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translate(var(--tx), var(--ty)) scale(1); 
+                opacity: 0; 
+            }
+        }
+        
+        .fade-out {
+            animation: fadeOut 1s forwards 1.5s;
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+        /* Main Content Initial State */
+        .main-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+        
+        .main-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Candy Shapes */
+        .candy-item {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .candy-item:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        /* Candy Label - Now separated from candy elements */
+        .candy-label {
+            text-align: center;
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 20px;
+            padding: 8px 12px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .candy-wrapper:hover .candy-label {
+            transform: translateY(5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Lollipop Candy */
+        .lollipop {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .lollipop-head {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF85A2, #FF5C8D);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .lollipop-stick {
+            width: 20px;
+            height: 100px;
+            background: linear-gradient(90deg, #FFFFFF, #F0F0F0);
+            border-radius: 10px;
+            margin-top: -10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .lollipop-swirl {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #FF85A2 0%,
+                #FFFFFF 10%,
+                #FF85A2 20%,
+                #FFFFFF 30%,
+                #FF85A2 40%,
+                #FFFFFF 50%,
+                #FF85A2 60%,
+                #FFFFFF 70%,
+                #FF85A2 80%,
+                #FFFFFF 90%,
+                #FF85A2 100%
+            );
+            opacity: 0.7;
+            animation: spin 10s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Wrapped Candy */
+        .wrapped-candy {
+            position: relative;
+            width: 140px;
+            height: 80px;
+            margin: 0 auto;
+        }
+        
+        .wrapped-center {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #B388EB, #8A4FFF);
+            border-radius: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .wrapped-twist-left, .wrapped-twist-right {
+            position: absolute;
+            width: 30px;
+            height: 60px;
+            background: linear-gradient(90deg, #D4B5FF, #B388EB);
+            border-radius: 15px;
+            z-index: 1;
+        }
+        
+        .wrapped-twist-left {
+            left: -15px;
+            top: 10px;
+            transform: rotate(15deg);
+        }
+        
+        .wrapped-twist-right {
+            right: -15px;
+            top: 10px;
+            transform: rotate(-15deg);
+        }
+        
+        .wrapped-shine {
+            position: absolute;
+            width: 60px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            top: 15px;
+            left: 40px;
+            transform: rotate(-10deg);
+        }
+        
+        /* Jelly Bean */
+        .jelly-bean {
+            position: relative;
+            width: 120px;
+            height: 80px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #FFC85C, #FF9A0D);
+            border-radius: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .jelly-shine {
+            position: absolute;
+            width: 80px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            top: 10px;
+            left: 20px;
+            transform: rotate(-10deg);
+        }
+        
+        .jelly-spots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .jelly-spot {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+        
+        /* Round Candy with Drooling Emoji */
+        .round-candy {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+        }
+        
+        .round-candy-shell {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF5C8D, #FF85A2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .round-candy-shine {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            top: 20px;
+            left: 30px;
+            transform: rotate(-20deg);
+        }
+        
+        .round-candy-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+        
+        .round-candy-pattern::before,
+        .round-candy-pattern::after {
+            content: "";
+            position: absolute;
+            background-color: white;
+        }
+        
+        .round-candy-pattern::before {
+            width: 100%;
+            height: 20px;
+            top: 50px;
+            transform: rotate(45deg);
+        }
+        
+        .round-candy-pattern::after {
+            width: 100%;
+            height: 20px;
+            top: 50px;
+            transform: rotate(-45deg);
+        }
+        
+        .emoji-container {
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .emoji {
+            font-size: 40px;
+            line-height: 1;
+        }
+        
+        .candy-special-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #FF3366;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        /* Drooling Animation */
+        .drooling-animation {
+            animation: drool 2s ease-in-out infinite;
+        }
+        
+        @keyframes drool {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
+        }
+        
+        /* Voucher Styles */
+        .voucher-container {
+            display: none;
+            max-width: 500px;
+            width: 90%;
+            margin: 20px auto;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        
+        .voucher {
+            background: linear-gradient(135deg, #FF85A2, #FF5C8D);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .voucher-inner {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .voucher-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #FF85A2;
+        }
+        
+        .voucher-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            color: #FF3366;
+            margin-bottom: 5px;
+        }
+        
+        .voucher-subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .voucher-content {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .voucher-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FF3366;
+            margin: 15px 0;
+        }
+        
+        .voucher-description {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 15px;
+        }
+        
+        .voucher-footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed #FF85A2;
+        }
+        
+        .voucher-code {
+            font-family: monospace;
+            font-size: 1.2rem;
+            background-color: #f5f5f5;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+        
+        .voucher-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .voucher-decoration-1 {
+            top: -30px;
+            left: -30px;
+        }
+        
+        .voucher-decoration-2 {
+            bottom: -30px;
+            right: -30px;
+        }
+        
+        .voucher-stamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(15deg);
+        }
+        
+        .voucher-stamp-inner {
+            width: 100%;
+            height: 100%;
+            border: 2px dashed #FF3366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #FF3366;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 5px;
+        }
+        
+        .claim-button {
+            background: linear-gradient(135deg, #FF85A2, #FF3366);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .claim-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 51, 102, 0.4);
+        }
+        
+        .claim-button:active {
+            transform: translateY(0);
+        }
+        
+        .claim-button::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+        
+        .claim-button:hover::after {
+            left: 100%;
+        }
+        
+        .voucher-show {
+            display: block;
+            animation: voucherAppear 0.5s forwards;
+        }
+        
+        @keyframes voucherAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .food-emoji {
+            font-size: 1.5rem;
+            margin: 0 5px;
+        }
+
+        iframe {
+            aspect-ratio: 16 / 9;
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Gift Box Opening Screen -->
+    <div class="gift-container" id="giftContainer">
+        <div class="gift-sparkles" id="giftSparkles"></div>
+        
+        <div class="gift-box" id="giftBox">
+            <div class="gift-box-bottom"></div>
+            <div class="gift-ribbon-vertical"></div>
+            <div class="gift-ribbon-horizontal"></div>
+            <div class="gift-box-lid"></div>
+            <div class="gift-bow">
+                <div class="gift-bow-left"></div>
+                <div class="gift-bow-right"></div>
+                <div class="gift-bow-center"></div>
+            </div>
+        </div>
+        
+        <div class="gift-text fancy-title">This is a small Gift for you</div>
+        <div class="gift-click-hint">Click to open the Gift!</div>
+    </div>
+    
+    <!-- Sparkles for background effect -->
+    <div class="candy-sparkle sparkle1"></div>
+    <div class="candy-sparkle sparkle2"></div>
+    <div class="candy-sparkle sparkle3"></div>
+    <div class="candy-sparkle sparkle4"></div>
+    <div class="candy-sparkle sparkle5"></div>
+    
+    <!-- Candy SVG Background -->
+    <div class="candy-bg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <pattern id="candy-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="10" cy="10" r="5" fill="#FF85A2" opacity="0.3" />
+                <circle cx="0" cy="0" r="3" fill="#B388EB" opacity="0.3" />
+                <circle cx="20" cy="20" r="3" fill="#8FB8ED" opacity="0.3" />
+                <circle cx="0" cy="20" r="4" fill="#FFC85C" opacity="0.3" />
+                <circle cx="20" cy="0" r="4" fill="#A0E7E5" opacity="0.3" />
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#candy-pattern)" />
+        </svg>
+    </div>
+    
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="musicIcon">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+    </div>
+    
+    <!-- Audio Element (Note: This is a placeholder, you'll need to add the actual audio file) -->
+    <audio id="bgMusic" loop>
+        <source src="candy.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-12 main-content" id="mainContent">
+        <!-- Header Section -->
+        <header class="text-center mb-16">
+            <h1 class="fancy-title text-5xl md:text-6xl mb-6 text-pink-600">Alwan's Candy Land</h1>
+            <h2 class="text-4xl font-bold text-purple-600 mb-8">Welcome, Refiii</h2>
+            
+            <!-- Candy Illustration -->
+            <div class="w-32 h-48 mx-auto mb-8 candy-animation">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="#FF85A2" />
+                    <circle cx="50" cy="50" r="35" fill="#FFB6C1" />
+                    <path d="M30,50 Q50,30 70,50 Q50,70 30,50" fill="#FFF" opacity="0.6" />
+                    <circle cx="35" cy="40" r="5" fill="#FFF" opacity="0.8" />
+                </svg> -->
+                <img src="refi.jpeg.png" alt="" class="rounded-xl object-contain">
+            </div>
+            
+            <div class="bg-white bg-opacity-80 p-6 rounded-xl max-w-2xl mx-auto shadow-lg">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Selamat ulang tahun, <span class="font-bold text-pink-600">Refi</span>! 
+                    Ini adalah sekotak permen digital yang berisi kebahagiaan dan kehangatan, spesial untukmu. 
+                    Sama seperti lagu 'Candy' dari SEVENTEEN, setiap gigitan kecil di sini aku harap bisa membuatmu merasa lebih baik. 
+                    <span class="font-bold text-pink-600">Klik icon 'permen' di bawah ini untuk mengetahui isinya!</span>
+                </p>
+            </div>
+        </header>
+        
+        <!-- Candy Letters Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 candy-container mb-16">
+            <!-- Candy 1: Lollipop -->
+            <div class="candy-wrapper">
+                <div class="candy p-6 text-center cursor-pointer h-48 flex items-center justify-center" onclick="openLetter('letter1')">
+                    <div class="candy-item">
+                        <div class="lollipop">
+                            <div class="lollipop-head">
+                                <div class="lollipop-swirl"></div>
+                            </div>
+                            <div class="lollipop-stick"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Separated candy label -->
+                <div class="candy-label">Open When... You miss me 🤭</div>
+            </div>
+            
+            <!-- Candy 2: Wrapped Candy -->
+            <div class="candy-wrapper">
+                <div class="candy p-6 text-center cursor-pointer h-48 flex items-center justify-center" onclick="openLetter('letter2')">
+                    <div class="candy-item">
+                        <div class="wrapped-candy">
+                            <div class="wrapped-center"></div>
+                            <div class="wrapped-twist-left"></div>
+                            <div class="wrapped-twist-right"></div>
+                            <div class="wrapped-shine"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Separated candy label -->
+                <div class="candy-label">Open When... Life feels really hard 😭</div>
+            </div>
+            
+            <!-- Candy 3: Jelly Bean -->
+            <div class="candy-wrapper">
+                <div class="candy p-6 text-center cursor-pointer h-48 flex items-center justify-center" onclick="openLetter('letter3')">
+                    <div class="candy-item">
+                        <div class="jelly-bean">
+                            <div class="jelly-shine"></div>
+                            <div class="jelly-spots">
+                                <div class="jelly-spot" style="width: 15px; height: 15px; top: 20px; left: 30px;"></div>
+                                <div class="jelly-spot" style="width: 10px; height: 10px; top: 50px; left: 20px;"></div>
+                                <div class="jelly-spot" style="width: 12px; height: 12px; top: 40px; left: 80px;"></div>
+                                <div class="jelly-spot" style="width: 8px; height: 8px; top: 15px; left: 70px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Separated candy label -->
+                <div class="candy-label">Open When... You want to laugh 🤣</div>
+            </div>
+            
+            <!-- Candy 4: Round Candy with Drooling Emoji (REPLACED) -->
+            <div class="candy-wrapper">
+                <div class="candy p-6 text-center cursor-pointer h-48 flex items-center justify-center" onclick="openLetter('letter4')">
+                    <div class="candy-item heart-beat">
+                        <div class="round-candy">
+                            <div class="round-candy-shell">
+                                <div class="round-candy-shine"></div>
+                                <div class="round-candy-pattern"></div>
+                                <div class="emoji-container">
+                                    <div class="emoji drooling-animation">🤤</div>
+                                </div>
+                            </div>
+                            <div class="candy-special-badge">Yummy!</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Separated candy label -->
+                <div class="candy-label">Open When... You hungry 😋</div>
+            </div>
+        </div>
+        
+        <!-- Footer Message -->
+        <footer class="text-center max-w-3xl mx-auto bg-white bg-opacity-80 p-8 rounded-xl shadow-lg">
+            <p class="text-lg text-gray-700 mb-4">
+                Setiap 'permen' ini adalah potongan kecil dari perasaanku untukmu, <span class="font-bold text-pink-600">Refi</span>. 
+                Semoga hari ulang tahunmu semanis permen, dan hidupmu selalu dipenuhi kebahagiaan. Love you!
+            </p>
+            <div class="text-pink-600 font-bold text-xl fancy-title">Made with ♥💖❤, Alwan</div>
+        </footer>
+    </div>
+    
+    <!-- Letter Modals -->
+    <!-- Letter 1 Modal -->
+    <div id="letter1" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+        <div class="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-pink-600">Open When... You miss me 🤭</h3>
+                <button onclick="closeLetter('letter1')" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="letter-content p-6">
+                <!-- Message Content -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700">Pesan Untukmu:</h4>
+                    <p class="text-gray-600 italic">
+                        Ingat dengan foto anak ini? Ya, benar. Anak ini kamu bilang mirip sama aku wkwk. Kamu bisa panggil dia waktu di sekolah yaa kalo kangen aku 😂
+                    </p>
+                </div>
+                
+                <!-- Media Content -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700">Foto Kenangan:</h4>
+                    <div class="bg-gray-100 rounded-lg p-8 text-center">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#B388EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <p class="text-gray-500">Tambahkan foto atau video kenangan di sini</p> -->
+                        <img src="anak-mirip.jpeg" alt="Kamu siapa? wkwk">
+                    </div>
+                </div>
+                
+                <!-- External Link (Optional) -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700">My Go to SEVENTEEN song for this candy:</h4>
+                    <div class="bg-gray-100 rounded-lg p-4 text-center">
+                        <!-- <p class="text-gray-500">Tambahkan link ke lagu, video, atau kenangan spesial di sini</p> -->
+                         <iframe src="https://www.youtube.com/embed/2gfMlBCjvNw?si=Xl6EU-IT7n6w9uOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Letter 2 Modal -->
+    <div id="letter2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+        <div class="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-purple-600">Open When... Life feels really hard 😭</h3>
+                <button onclick="closeLetter('letter2')" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="letter-content p-6">
+                <!-- Message Content -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700">Pesan Untukmu:</h4>
+                    <p class="text-gray-600 italic">
+                        Coba ingat-ingat masalah yang pernah kamu hadapi dulu. Apakah ada yang tidak selesai? Tidak, kan. Semuanya pasti selesai kok hehe. Yakin deh sama pedoman hidup kita (Q.S. Al-Insyirah 5-6). Semangat terus yaa 😁
+                    </p>
+                </div>
+                
+                <!-- Media Content -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700">Foto Kutipan dari buku yang aku suka:</h4>
+                    <div class="bg-gray-100 rounded-lg p-8 text-center">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#B388EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg> -->
+                        <!-- <p class="text-gray-500">Tambahkan foto atau video inspiratif di sini</p> -->
+                         <img src="buku.png" alt="Kamu siapa? wkwk">
+                    </div>
+                </div>
+                
+                <!-- External Link (Optional) -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700">My Go to SEVENTEEN song for this candy:</h4>
+                    <div class="bg-gray-100 rounded-lg p-4 text-center">
+                        <!-- <p class="text-gray-500">Tambahkan link ke artikel motivasi atau sumber inspirasi mengajar di sini</p> -->
+                         <iframe src="https://www.youtube.com/embed/j-3Df1X6F_I?si=s2wAAt7fPLWFrooX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Letter 3 Modal -->
+    <div id="letter3" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+        <div class="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-yellow-600">Open When... Kamu Ingin Tertawa</h3>
+                <button onclick="closeLetter('letter3')" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="letter-content p-6">
+                <!-- Message Content -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700">Pesan Untukmu:</h4>
+                    <p class="text-gray-600 italic">
+                        Pertama-tama aku minta maaf kalo aku orangnya gk bisa ngelucu untuk bikin kamu ketawa yaa 😂, so I give this one too your Boo (Seungkwan)
+                    </p>
+                </div>
+                
+                <!-- Media Content -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700">Foto Lucu Seungkwan:</h4>
+                    <div class="bg-gray-100 rounded-lg p-8 text-center">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#FFC85C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <p class="text-gray-500">Tambahkan foto atau video lucu di sini</p> -->
+                        <img src="seungkwan.jpg" alt="Kamu siapa? wkwk">
+                    </div>
+                </div>
+                
+                <!-- External Link (Optional) -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700">Video Lucu Seungkwan Marah:</h4>
+                    <div class="bg-gray-100 rounded-lg p-4 text-center">
+                        <iframe src="https://www.youtube.com/embed/cgLbJIVW24U?si=Frmbw6isb_ime-kj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Letter 4 Modal (Food Voucher) -->
+    <div id="letter4" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+        <div class="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-yellow-600">Open When... You hungry 😋</h3>
+                <button onclick="closeLetter('letter4')" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="letter-content p-6">
+                <!-- Message Content -->
+                <div class="mb-6 text-center">
+                    <h4 class="text-xl font-semibold mb-4 text-yellow-600">This one is special (pake karet wkwk) <span class="food-emoji">🍗</span><span class="food-emoji">🍕</span><span class="food-emoji">🍦</span></h4>
+                    <p class="text-gray-600 text-lg">
+                        Aku tau kamu pasti lagi pengen makan ayam goreng, Tenang aku traktir 😁
+                    </p>
+                </div>
+                
+                <!-- Claim Button -->
+                <button id="claimButton" class="claim-button">
+                    Klaim Hadiah Spesialmu di Sini!
+                </button>
+                
+                <!-- Voucher (Hidden initially) -->
+                <div id="voucherContainer" class="voucher-container">
+                    <div class="voucher">
+                        <div class="voucher-decoration voucher-decoration-1"></div>
+                        <div class="voucher-decoration voucher-decoration-2"></div>
+                        
+                        <div class="voucher-inner">
+                            <div class="voucher-header">
+                                <div class="voucher-title">Voucher Makanan Spesial</div>
+                                <div class="voucher-subtitle">Dari Alwan untuk Refi</div>
+                            </div>
+                            
+                            <div class="voucher-content">
+                                <div class="voucher-value">GRATIS</div>
+                                <div class="voucher-description">
+                                    Ayam Goreng Richeese!
+                                </div>
+                                <p class="text-gray-600">
+                                    Tunjukkan voucher ini padaku, dan aku akan pesankan 
+                                    <br><strong>Ayam Goreng Richeese!</strong> untukmu!
+                                </p>
+                                <div class="voucher-code">Voucher Code: ILOVEYOU</div>
+                            </div>
+                            
+                            <div class="voucher-stamp">
+                                <div class="voucher-stamp-inner">
+                                    SPECIAL TREAT
+                                </div>
+                            </div>
+                            
+                            <div class="voucher-footer">
+                                <p>Voucher ini berlaku kalo kamu mau ditraktir. Kalo gk mau? Tetep aku traktir wkwk ❤️</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Create gift sparkles
+        function createGiftSparkles() {
+            const sparklesContainer = document.getElementById('giftSparkles');
+            const colors = ['#FF85A2', '#B388EB', '#8FB8ED', '#FFC85C', '#A0E7E5'];
+            
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'gift-sparkle';
+                sparkle.style.left = Math.random() * 300 + 'px';
+                sparkle.style.top = Math.random() * 300 + 'px';
+                sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                
+                sparklesContainer.appendChild(sparkle);
+            }
+        }
+        
+        // Create candy burst animation
+        function createCandyBurst() {
+            const giftContainer = document.getElementById('giftContainer');
+            const colors = ['#FF85A2', '#B388EB', '#8FB8ED', '#FFC85C', '#A0E7E5'];
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            for (let i = 0; i < 50; i++) {
+                const candy = document.createElement('div');
+                candy.className = 'candy-burst';
+                
+                // Random position around the center
+                candy.style.left = centerX + 'px';
+                candy.style.top = centerY + 'px';
+                
+                // Random color
+                candy.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random size
+                const size = Math.random() * 20 + 10;
+                candy.style.width = size + 'px';
+                candy.style.height = size + 'px';
+                
+                // Random direction
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 500 + 200;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                // Set custom properties for the animation
+                candy.style.setProperty('--tx', tx + 'px');
+                candy.style.setProperty('--ty', ty + 'px');
+                
+                // Add to container
+                giftContainer.appendChild(candy);
+                
+                // Animate
+                candy.style.animation = `burstOut ${Math.random() * 1 + 1}s ease-out forwards`;
+                
+                // Remove after animation
+                setTimeout(() => {
+                    candy.remove();
+                }, 2000);
+            }
+        }
+        
+        // Function to open gift
+        function openGift() {
+                            bgMusic.play();
+                musicIcon.innerHTML = `
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                    <line x1="3" y1="3" x2="21" y2="21"></line>
+                `;
+                isMusicPlaying = true;
+            const giftContainer = document.getElementById('giftContainer');
+            const mainContent = document.getElementById('mainContent');
+            
+            // Add opening class to start animation
+            giftContainer.classList.add('gift-opening');
+            
+            // Create candy burst effect
+            createCandyBurst();
+            
+            // Fade out gift container after animation
+            setTimeout(() => {
+                giftContainer.classList.add('fade-out');
+                
+                // Show main content
+                setTimeout(() => {
+                    mainContent.classList.add('visible');
+                }, 500);
+            }, 1000);
+        }
+        
+        // Function to open letter
+        function openLetter(letterId) {
+            document.getElementById(letterId).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // Add confetti effect for special letter
+            if (letterId === 'letter4') {
+                createConfetti();
+            }
+        }
+        
+        // Function to close letter
+        function closeLetter(letterId) {
+            document.getElementById(letterId).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            
+            // Reset voucher if letter4 is closed
+            if (letterId === 'letter4') {
+                const voucherContainer = document.getElementById('voucherContainer');
+                const claimButton = document.getElementById('claimButton');
+                
+                voucherContainer.classList.remove('voucher-show');
+                claimButton.style.display = 'block';
+            }
+        }
+        
+        // Music control
+        const musicControl = document.getElementById('musicControl');
+        const musicIcon = document.getElementById('musicIcon');
+        const bgMusic = document.getElementById('bgMusic');
+        let isMusicPlaying = false;
+        
+        musicControl.addEventListener('click', function() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicIcon.innerHTML = `
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                `;
+            } else {
+                bgMusic.play();
+                musicIcon.innerHTML = `
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                    <line x1="3" y1="3" x2="21" y2="21"></line>
+                `;
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+        
+        // Create confetti effect for special letter
+        function createConfetti() {
+            const confettiContainer = document.getElementById('letter4');
+            const colors = ['#FF85A2', '#B388EB', '#8FB8ED', '#FFC85C', '#A0E7E5'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = -20 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.opacity = 1;
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                
+                confettiContainer.appendChild(confetti);
+                
+                // Animate confetti
+                const animationDuration = Math.random() * 3 + 2;
+                confetti.style.animation = `fall ${animationDuration}s linear forwards`;
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                
+                // Create keyframe animation
+                const keyframes = `
+                    @keyframes fall {
+                        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                        100% { transform: translateY(${window.innerHeight}px) rotate(360deg); opacity: 0; }
+                    }
+                `;
+                
+                const styleSheet = document.createElement('style');
+                styleSheet.type = 'text/css';
+                styleSheet.innerText = keyframes;
+                document.head.appendChild(styleSheet);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                    styleSheet.remove();
+                }, animationDuration * 1000 + 5000);
+            }
+        }
+        
+        // Add candy sparkles to background
+        function addSparkles() {
+            const container = document.body;
+            const colors = ['#FF85A2', '#B388EB', '#8FB8ED', '#FFC85C', '#A0E7E5'];
+            
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'candy-sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                
+                container.appendChild(sparkle);
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target === modals[i]) {
+                    modals[i].classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                    
+                    // Reset voucher if letter4 is closed
+                    if (modals[i].id === 'letter4') {
+                        const voucherContainer = document.getElementById('voucherContainer');
+                        const claimButton = document.getElementById('claimButton');
+                        
+                        voucherContainer.classList.remove('voucher-show');
+                        claimButton.style.display = 'block';
+                    }
+                }
+            }
+        };
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create gift sparkles
+            createGiftSparkles();
+            
+            // Add sparkles to background
+            addSparkles();
+            
+            // Add click event to gift box
+            document.getElementById('giftBox').addEventListener('click', openGift);
+            document.querySelector('.gift-text').addEventListener('click', openGift);
+            document.querySelector('.gift-click-hint').addEventListener('click', openGift);
+            
+            // Add click event to claim button
+            document.getElementById('claimButton').addEventListener('click', function() {
+                const voucherContainer = document.getElementById('voucherContainer');
+                const claimButton = document.getElementById('claimButton');
+                
+                // Hide button and show voucher
+                claimButton.style.display = 'none';
+                voucherContainer.classList.add('voucher-show');
+                
+                // Create special confetti effect for voucher reveal
+                createVoucherConfetti();
+            });
+        });
+        
+        // Create special confetti effect for voucher reveal
+        function createVoucherConfetti() {
+            const voucherContainer = document.getElementById('voucherContainer');
+            const colors = ['#FF85A2', '#B388EB', '#8FB8ED', '#FFC85C', '#A0E7E5'];
+            
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = -20 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.opacity = 1;
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                confetti.style.zIndex = '1000';
+                
+                voucherContainer.appendChild(confetti);
+                
+                // Animate confetti
+                const animationDuration = Math.random() * 2 + 1;
+                confetti.style.animation = `voucherConfetti ${animationDuration}s linear forwards`;
+                
+                // Create keyframe animation
+                const keyframes = `
+                    @keyframes voucherConfetti {
+                        0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+                        100% { transform: translateY(${voucherContainer.offsetHeight + 50}px) rotate(360deg); opacity: 0; }
+                    }
+                `;
+                
+                const styleSheet = document.createElement('style');
+                styleSheet.type = 'text/css';
+                styleSheet.innerText = keyframes;
+                document.head.appendChild(styleSheet);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                    styleSheet.remove();
+                }, animationDuration * 1000 + 100);
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94b7bff522e981ad',t:'MTc0OTIxMTIzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
